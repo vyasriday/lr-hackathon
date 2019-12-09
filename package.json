@@ -1,0 +1,22 @@
+{
+  "name": "lr-hackathon",
+  "version": "1.0.0",
+  "description": "Hackathon project for lr developer dat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vyasriday/lr-hackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vyasriday/lr-hackathon/issues"
+  },
+  "homepage": "https://github.com/vyasriday/lr-hackathon#readme",
+  "dependencies": {
+    "passport": "^0.4.0"
+  }
+}
