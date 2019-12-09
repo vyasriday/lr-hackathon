@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var axios = require('axios');
+const fetch = require("node-fetch");
 
 module.exports = function (passport) {
   var instance = axios.create({
@@ -21,7 +22,7 @@ module.exports = function (passport) {
   },
     function (req, email, password, done) {
       process.nextTick(function () {
-        axios.post('https://api.loginradius.io/v1/register/', {
+        fetch('https://api.loginradius.io/v1/register/', {
           email: email,
           password: password
         })
@@ -33,4 +34,29 @@ module.exports = function (passport) {
           });
       });
     }));
+
+    passport.use('Login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true // allows us to pass back the entire request to the callback
+  },
+    function (req, email, password, done) {
+      process.nextTick(function () {
+        fetch('https://api.loginradius.io/v1/login/', {
+          method: 'POST',
+          data: {
+            email: email,
+            password: password
+          }
+          
+        })
+          .then((response) => {
+            return done(null, { "message": "user logged in " });
+          }, (error) => {
+            console.log(error);
+            // return done(null, error);
+          });
+      });
+    }));
+
 }
